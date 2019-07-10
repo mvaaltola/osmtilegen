@@ -40,20 +40,20 @@ class GoogleProjection:
             self.zc.append((e,e))
             self.Ac.append(c)
             c *= 2
-                
+
     def fromLLtoPixel(self,ll,zoom):
-         d = self.zc[zoom]
-         e = round(d[0] + ll[0] * self.Bc[zoom])
-         f = minmax(sin(DEG_TO_RAD * ll[1]),-0.9999,0.9999)
-         g = round(d[1] + 0.5*log((1+f)/(1-f))*-self.Cc[zoom])
-         return (e,g)
-     
+        d = self.zc[zoom]
+        e = round(d[0] + ll[0] * self.Bc[zoom])
+        f = minmax(sin(DEG_TO_RAD * ll[1]),-0.9999,0.9999)
+        g = round(d[1] + 0.5*log((1+f)/(1-f))*-self.Cc[zoom])
+        return (e,g)
+
     def fromPixelToLL(self,px,zoom):
-         e = self.zc[zoom]
-         f = (px[0] - e[0])/self.Bc[zoom]
-         g = (px[1] - e[1])/-self.Cc[zoom]
-         h = RAD_TO_DEG * ( 2 * atan(exp(g)) - 0.5 * pi)
-         return (f,h)
+        e = self.zc[zoom]
+        f = (px[0] - e[0])/self.Bc[zoom]
+        g = (px[1] - e[1])/-self.Cc[zoom]
+        h = RAD_TO_DEG * ( 2 * atan(exp(g)) - 0.5 * pi)
+        return (f,h)
 
 
 
@@ -139,7 +139,7 @@ class RenderThread:
             pass
 
 
-def render_tiles(bbox, mapfile, tile_dir, minZoom=1,maxZoom=18, name="unknown", num_threads=NUM_THREADS, tms_scheme=False):
+def render_tiles(bbox, mapfile, tile_dir, minZoom=1, maxZoom=18, name="unknown", num_threads=NUM_THREADS, tms_scheme=False):
     print "render_tiles(",bbox, mapfile, tile_dir, minZoom,maxZoom, name,")"
 
     # Launch rendering threads
@@ -154,13 +154,14 @@ def render_tiles(bbox, mapfile, tile_dir, minZoom=1,maxZoom=18, name="unknown", 
         renderers[i] = render_thread
 
     if not os.path.isdir(tile_dir):
-         os.mkdir(tile_dir)
+        os.mkdir(tile_dir)
 
-    gprj = GoogleProjection(maxZoom+1) 
+    gprj = GoogleProjection(maxZoom+1)
 
     ll0 = (bbox[0],bbox[3])
     ll1 = (bbox[2],bbox[1])
 
+    # populate queue
     for z in range(minZoom,maxZoom + 1):
         px0 = gprj.fromLLtoPixel(ll0,z)
         px1 = gprj.fromLLtoPixel(ll1,z)
@@ -178,7 +179,7 @@ def render_tiles(bbox, mapfile, tile_dir, minZoom=1,maxZoom=18, name="unknown", 
             if not os.path.isdir(tile_dir + zoom + '/' + str_x):
                 os.mkdir(tile_dir + zoom + '/' + str_x)
             for y in range(int(px0[1]/256.0),int(px1[1]/256.0)+1):
-                # Validate x co-ordinate
+                # Validate y co-ordinate
                 if (y < 0) or (y >= 2**z):
                     continue
                 # flip y to match OSGEO TMS spec

@@ -95,7 +95,7 @@ sudo apt-get install -y mapnik-utils
 
 ./scripts/get-shapefiles.py
 
-sudo su - postgres -c "cd /tmp/openstreetmap-carto; osm2pgsql -G --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua --cache 20000 --number-processes 20 -d gis ../planet-latest.osm.pbf"
+sudo su - postgres -c "cd /tmp/openstreetmap-carto; osm2pgsql -G --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua --cache 22000 --number-processes 16 -d gis ../planet-latest.osm.pbf"
 
 sudo -u postgres psql --username=postgres --dbname=gis -f indexes.sql
 

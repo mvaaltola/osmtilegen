@@ -27,11 +27,9 @@ sudo apt-get -y install osm2pgsql
 
 cd /tmp
 
-# get https://planet.openstreetmap.org/pbf/planet-latest.osm.pbf
-wget https://planet.openstreetmap.org/planet/planet-latest.osm.bz2
-# wget https://download.geofabrik.de/europe/germany/hamburg-latest.osm.bz2
-
-# bzip2 -d hamburg-latest.osm.bz2
+wget https://planet.openstreetmap.org/pbf/planet-latest.osm.pbf
+# wget http://download.geofabrik.de/europe/finland-latest.osm.pbf
+# wget https://planet.openstreetmap.org/planet/planet-latest.osm.bz2
 
 wget https://svn.openstreetmap.org/applications/rendering/mapnik/generate_image.py
 

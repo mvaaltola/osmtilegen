@@ -23,14 +23,15 @@ sudo -u postgres psql --username=postgres --dbname=gis -c "CREATE EXTENSION hsto
 
 sudo apt-get -y install osm2pgsql
 
-# get the latest Hamburg extract for OSM
+# get the latest planet extract for OSM
 
 cd /tmp
 
-#wget https://planet.openstreetmap.org/planet/planet-latest.osm.bz2
-wget https://download.geofabrik.de/europe/germany/hamburg-latest.osm.bz2
+# get https://planet.openstreetmap.org/pbf/planet-latest.osm.pbf
+wget https://planet.openstreetmap.org/planet/planet-latest.osm.bz2
+# wget https://download.geofabrik.de/europe/germany/hamburg-latest.osm.bz2
 
-bzip2 -d hamburg-latest.osm.bz2
+# bzip2 -d hamburg-latest.osm.bz2
 
 wget https://svn.openstreetmap.org/applications/rendering/mapnik/generate_image.py
 
@@ -48,7 +49,7 @@ git clone https://github.com/gravitystorm/openstreetmap-carto
 
 cd openstreetmap-carto
 
-carto project.mml >osm.xml
+carto project.mml > osm.xml
 
 # INSTALL mapnik
 
@@ -94,7 +95,8 @@ sudo apt-get install -y mapnik-utils
 
 ./scripts/get-shapefiles.py
 
-sudo su - postgres -c "cd /tmp/openstreetmap-carto; osm2pgsql -G --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua -d gis ../hamburg-latest.osm" 
+sudo su - postgres -c "cd /tmp/openstreetmap-carto; osm2pgsql -G --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua --cache 20000 --number-processes 20 -d gis ../planet-latest.osm.pbf"
+
 
 sudo -u postgres mkdir -p /tmp/tiles
 

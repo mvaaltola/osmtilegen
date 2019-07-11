@@ -34,7 +34,7 @@ class GoogleProjection:
         self.Ac = []
         c = 256
         for d in range(0,levels):
-            e = c/2;
+            e = c/2
             self.Bc.append(c/360.0)
             self.Cc.append(c/(2 * pi))
             self.zc.append((e,e))
@@ -78,8 +78,8 @@ class RenderThread:
         p1 = ((x + 1) * 256, y * 256)
 
         # Convert to LatLong (EPSG:4326)
-        l0 = self.tileproj.fromPixelToLL(p0, z);
-        l1 = self.tileproj.fromPixelToLL(p1, z);
+        l0 = self.tileproj.fromPixelToLL(p0, z)
+        l1 = self.tileproj.fromPixelToLL(p1, z)
 
         # Convert to map projection (e.g. mercator co-ords EPSG:900913)
         c0 = self.prj.forward(mapnik.Coord(l0[0],l0[1]))
@@ -216,53 +216,17 @@ if __name__ == "__main__":
     #
     # Change the following for different bounding boxes and zoom levels
     #
-    # Start with an overview
     # World
-#    bbox = (-180.0,-90.0, 180.0,90.0)
 
-#    render_tiles(bbox, mapfile, tile_dir, 0, 5, "World")
+    bbox = (-180.0, -85.0, 180.0, 85.0)
+    mapfile = '/tmp/openstreetmap-carto/osm.xml'
+    tile_dir = '/tmp/tiles/'
+    minZoom = 0
+    maxZoom = 10
+    name = 'World'
 
-#    minZoom = 10
-#    maxZoom = 16
-#    bbox = (-2, 50.0,1.0,52.0)
-#    render_tiles(bbox, mapfile, tile_dir, minZoom, maxZoom)
+    render_tiles(bbox, mapfile, tile_dir, minZoom, maxZoom, name)
 
-    # Muenchen
-#    bbox = (11.4,48.07, 11.7,48.22)
-#    render_tiles(bbox, mapfile, tile_dir, 1, 12 , "Muenchen")
-
-    # Muenchen+
-#    bbox = (11.3,48.01, 12.15,48.44)
-#    render_tiles(bbox, mapfile, tile_dir, 7, 12 , "Muenchen+")
-
-    # Muenchen++
-#    bbox = (10.92,47.7, 12.24,48.61)
-#    render_tiles(bbox, mapfile, tile_dir, 7, 12 , "Muenchen++")
-
-    # Nuernberg
-#    bbox=(10.903198,49.560441,49.633534,11.038085)
-#    render_tiles(bbox, mapfile, tile_dir, 10, 16, "Nuernberg")
-
-    # Karlsruhe
-#    bbox=(8.179113,48.933617,8.489252,49.081707)
-#    render_tiles(bbox, mapfile, tile_dir, 10, 16, "Karlsruhe")
-
-    # Karlsruhe+
-#    bbox = (8.3,48.95,8.5,49.05)
-#    render_tiles(bbox, mapfile, tile_dir, 1, 16, "Karlsruhe+")
-
-    # Augsburg
-#    bbox = (8.3,48.95,8.5,49.05)
-#    render_tiles(bbox, mapfile, tile_dir, 1, 16, "Augsburg")
-
-    # Augsburg+
-#    bbox=(10.773251,48.369594,10.883834,48.438577)
-#    render_tiles(bbox, mapfile, tile_dir, 10, 14, "Augsburg+")
-
-    # Europe+
-#    bbox = (1.0,10.0, 20.6,50.0)
-#    render_tiles(bbox, mapfile, tile_dir, 1, 11 , "Europe+")
-
-    bbox = (8.4213643278, 53.3949251389, 10.3242585128, 53.9644376366)
-    render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 16, "Hamburg")
+    # bbox = (8.4213643278, 53.3949251389, 10.3242585128, 53.9644376366)
+    # render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 16, "Hamburg")
     os._exit(0)

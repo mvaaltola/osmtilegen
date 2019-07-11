@@ -9,7 +9,7 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
 
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
 sudo apt-get update
-sudo apt-get -y install postgresql-10 postgresql-10-postgis-2.5  unzip
+sudo apt-get -y install postgresql-11 postgresql-11-postgis-2.5  unzip
 
 sudo -u postgres createuser gisuser
 

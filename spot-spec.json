@@ -4,14 +4,14 @@
             "DeviceName": "/dev/sda1",
             "Ebs": {
                 "DeleteOnTermination": true,
-                "VolumeSize": 50,
+                "VolumeSize": 2000,
                 "VolumeType": "gp2"
             }
         }
     ],
     "EbsOptimized": true,
     "ImageId": "ami-0085d4f8878cddc81",
-    "InstanceType": "c4.4xlarge",
+    "InstanceType": "c5.4xlarge",
     "KeyName": "osmtilegen",
     "Monitoring": {
         "Enabled": false

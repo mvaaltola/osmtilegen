@@ -119,8 +119,9 @@ class RenderThread:
                 else:
                     try:
                         self.render_tile(tile_uri, x, y, z)
-                    except:
+                    except Exception as e:
                         print "Exception generating file ", name
+                        print e
                         self.q.task_done()
                         break
                 empty= ''
